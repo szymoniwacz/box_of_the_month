@@ -1,0 +1,11 @@
+/.bundle
+/log/*
+/tmp/*
+.keep
+.byebug_history
+.ruby_gemset
+.ruby_version
+config/settings.local.yml
+config/settings/*.local.yml
+config/environments/*.local.yml
+.env
