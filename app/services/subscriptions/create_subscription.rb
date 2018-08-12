@@ -4,6 +4,7 @@ module Subscriptions
 
     def initialize(attrs = {})
       @form = attrs.fetch(:form)
+      @customer = attrs.fetch(:customer)
     end
 
     def call
@@ -15,10 +16,11 @@ module Subscriptions
 
     private
 
-    attr_reader :plan
+    attr_reader :plan, :customer
 
     def process_payment
-      @payment = subscription.payments.create(Payments::ProcessPayment.call({payment_data: payment_data}))
+      data = Payments::ProcessPayment.call({payment_data: payment_data})
+      @payment = subscription.payments.create(data)
     end
 
     def payment_data
@@ -33,7 +35,7 @@ module Subscriptions
     end
 
     def subscription
-      @subscription ||= Subscription.create(form.to_hash)
+      @subscription ||= customer.subscriptions.create(form.to_hash)
     end
 
     def plan

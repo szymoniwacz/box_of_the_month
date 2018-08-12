@@ -1,10 +1,9 @@
-class CreateSubscriptions < ActiveRecord::Migration[5.1]
+class CreateSubscriptions < ActiveRecord::Migration[5.2]
   def change
     create_table :subscriptions do |t|
-      t.string :name
-      t.string :address
-      t.string :zip_code
-      t.string :plan_id
+      t.integer :plan_id
+      t.integer :customer_id
+
       t.timestamps
     end
   end

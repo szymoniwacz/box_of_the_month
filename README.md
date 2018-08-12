@@ -22,13 +22,42 @@ Next, execute the database migrations/schema setup:
 
     bundle exec rails server
 
-## Sample request
+## Description
 
-    POST http://localhost:3000/v1/subscriptions
+### To subscribe for selected plan first you need to register new customer:
+
+Example request:
+
+    POST http://localhost:3000/v1/customers
+    Content-Type: application/json
     {
-      "name": "Nazwa",
+    	"name": "Sample Name",
+    	"address": "Sample Address",
+    	"zip_code": "01001"
+    }
+
+### In response you will receive token which is necessary for authorization to make a subscription.
+
+Example response:
+
+    {
+      "id": 7,
+      "name": "Sample Name",
       "address": "Sample Address",
       "zip_code": "01001",
+      "token": "cbc1c19a-e5fa-4b69-acc0-0b0703187db0"
+    }
+
+### Before subscribing you have to choose which 'Box of the month' plan is most suited for you:
+
+    GET http://localhost:3000/v1/plans
+
+### Than you can subscribe:
+
+    POST http://localhost:3000/v1/subscriptions
+    Content-Type: application/json
+    Authorization: cbc1c19a-e5fa-4b69-acc0-0b0703187db0
+    {
       "plan_id": 1,
       "card_number": 4242424242424242,
       "expiration_date": "01/2024",
@@ -36,6 +65,32 @@ Next, execute the database migrations/schema setup:
       "billing_zip_code": 10100
     }
 
+### Possible errors:
+
+If your payment is not successful you will receive message like:
+
+    {
+        "status": 400,
+        "error": "payment_failed",
+        "message": "Payment failed.",
+        "details": {
+            "error_code": 1000001,
+            "error": "Invalid credit card number"
+        }
+    }
+
+Possible error codes:
+
+* 1000001: Invalid credit card number
+* 1000002: Insufficient funds
+* 1000003: CVV failure
+* 1000004: Expired card
+* 1000005: Invalid zip code
+* 1000006: Invalid purchase amount
+* 1000007: Invalid token
+* 1000008: Invalid params: cannot specify both token and other credit card params like card_number, cvv, expiration_month, expiration_year or zip .
+
+## Task description
 
 #### Background
 Acme Online sells subscriptions to a “box of the month” service. They offer three products:
