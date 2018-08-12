@@ -16,4 +16,8 @@ FactoryBot.define do
     zip_code "01001"
     plan_id { Plan.first.id }
   end
+
+  factory :invalid_subscription, class: Subscription do
+    name { Faker::Name.name }
+  end
 end
