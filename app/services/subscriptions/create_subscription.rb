@@ -9,6 +9,7 @@ module Subscriptions
     def call
       return build_result(validation_error) if form.invalid?
       process_payment
+      return build_result(payment_error) unless @payment.success?
       build_result(subscription)
     end
 
@@ -18,7 +19,6 @@ module Subscriptions
 
     def process_payment
       @payment = subscription.payments.create(Payments::ProcessPayment.call({payment_data: payment_data}))
-      return build_result(payment_error) unless @payment.success?
     end
 
     def payment_data
