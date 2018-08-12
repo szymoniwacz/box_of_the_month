@@ -1,7 +1,6 @@
 class Error
   class PaymentFailed < Error
     def initialize(error_code = nil)
-      puts "Error::PaymentFailed"
       message = I18n.t(:payment_failed, scope: 'errors.messages')
       error_details = {
         error_code: error_code,

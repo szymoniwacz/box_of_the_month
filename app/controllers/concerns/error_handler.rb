@@ -13,8 +13,6 @@ module ErrorHandler
   private
 
   def handle(error)
-    puts "error: #{error}"
-    raise "error.inspect"
     if error.is_a?(Error)
       render_error(error)
     elsif error.is_a?(ActiveRecord::RecordNotFound)
