@@ -3,7 +3,7 @@ require 'rails_helper'
 describe V1::SubscriptionsController, type: :controller do
   describe "POST #create" do
     context "when subscription attributes valid" do
-      let(:valid_subscription_data) { FactoryBot.attributes_for(:subscription, plan_id: Plan.first) }
+      let(:valid_subscription_data) { attributes_for(:subscription) }
 
       it {
         post :create, params: valid_subscription_data
