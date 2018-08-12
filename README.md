@@ -1,3 +1,42 @@
+# Box of the month application
+
+Simple json API billing engine used to process subscription of 'Box of the month'.
+
+## Installation
+
+### Set up Rails app
+
+First, install the gems required by the application:
+
+    bundle install
+
+Next, execute the database migrations/schema setup:
+
+    bundle exec rake db:setup
+
+### Run tests
+
+    bundle exec rspec spec
+
+### Start the app
+
+    bundle exec rails server
+
+## Sample request
+
+    POST http://localhost:3000/v1/subscriptions
+    {
+      "name": "Nazwa",
+      "address": "Sample Address",
+      "zip_code": "01001",
+      "plan_id": 1,
+      "card_number": 4242424242424242,
+      "expiration_date": "01/2024",
+      "cvv": 123,
+      "billing_zip_code": 10100
+    }
+
+
 #### Background
 Acme Online sells subscriptions to a “box of the month” service. They offer three products:
 * Bronze Box: $19.99/month
