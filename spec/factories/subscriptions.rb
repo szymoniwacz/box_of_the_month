@@ -15,12 +15,5 @@ FactoryBot.define do
     address { Faker::Address.full_address }
     zip_code "01001"
     plan_id { Plan.first.id }
-
-    factory :test_subscription_with_payments do
-      after(:create) do |subscription|
-        create(:payment, subscription_id: subscription.id,
-                         amount: subscription.plan.price)
-      end
-    end
   end
 end
