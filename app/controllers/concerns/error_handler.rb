@@ -13,8 +13,11 @@ module ErrorHandler
   private
 
   def handle(error)
+    puts "error: #{error}"
     if error.is_a?(Error)
       render_error(error)
+    else
+      render_error Error::InternalServerError.new(nil, error.message)
     end
   end
 

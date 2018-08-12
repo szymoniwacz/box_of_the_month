@@ -1,6 +1,7 @@
 en:
   errors:
     messages:
+      internal_server_error: 'Internal server error.'
       validation_failed: 'Validation failed.'
       payment_failed: 'Payment failed.'
       payments:
