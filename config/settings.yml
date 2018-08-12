@@ -6,3 +6,7 @@ i18n:
 payment:
   token: "64146941c4fe1666945e648cf429c0"
   url: "https://www.fakepay.io/purchase"
+
+cache:
+  static_page:
+    expires_in: 10.minutes

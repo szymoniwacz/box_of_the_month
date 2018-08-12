@@ -1,7 +1,7 @@
 puts "Creating plans"
-Plan.find_or_create_by(name: "Bronze Box", price: "19.99")
-Plan.find_or_create_by(name: "Silver Box", price: "49")
-Plan.find_or_create_by(name: "Gold Box", price: "99")
+Plan.find_or_create_by(name: "Bronze Box", price: "19.99", currency: "USD")
+Plan.find_or_create_by(name: "Silver Box", price: "49", currency: "USD")
+Plan.find_or_create_by(name: "Gold Box", price: "99", currency: "USD")
 
 selected_plan = Plan.first
 

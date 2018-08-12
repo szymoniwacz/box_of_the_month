@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2018_08_11_145135) do
   create_table "plans", force: :cascade do |t|
     t.string "name"
     t.float "price"
+    t.string "currency"
   end
 
   create_table "subscriptions", force: :cascade do |t|
