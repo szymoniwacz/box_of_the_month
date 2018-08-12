@@ -1,5 +1,8 @@
 i18n:
-  default_locale: :keys
+  default_locale: :en
   fallbacks:
-    - :en_GB
-    - :pl_PL
+    - :en
+
+payment:
+  token: "64146941c4fe1666945e648cf429c0"
+  url: "https://www.fakepay.io/purchase"

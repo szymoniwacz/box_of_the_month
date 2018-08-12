@@ -11,5 +11,11 @@ module V1
                status: :created
       end
     end
+
+    private
+
+    def subscription_params
+      @subscription_params ||= params.permit(:name, :address, :zip_code, :plan_id, :card_number, :expiration_date, :cvv, :billing_zip_code)
+    end
   end
 end

@@ -18,13 +18,15 @@ Bundler.require(*Rails.groups)
 
 module BoxOfTheMonth
   class Application < Rails::Application
-    config.i18n.available_locales = [:en_GB, :pl_PL]
+    config.i18n.available_locales = [:en]
     config.i18n.default_locale = Settings.i18n.default_locale
     config.i18n.enforce_available_locales = false
     config.i18n.fallbacks = Settings.i18n.fallbacks
 
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
+
+    config.time_zone = 'Warsaw'
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

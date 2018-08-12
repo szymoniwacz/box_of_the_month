@@ -7,6 +7,6 @@ development:
   <<: *default
   host:     <%= ENV['DATABASE_HOST'] || '127.0.0.1' %>
   database: <%= ENV['DATABASE_NAME'] || 'box_of_the_month' %>
-  username: <%= ENV['DATABASE_USER'] || 'postgres' %>
+  username: <%= ENV['DATABASE_USER'] || 'szymon' %>
   password: <%= ENV['DATABASE_PASS'] || nil %>
   port:     <%= ENV['DATABASE_PORT'] || 5432 %>

@@ -1,7 +1,12 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+puts "Creating plans"
+Plan.find_or_create_by(name: "Bronze Box", price: "19.99")
+Plan.find_or_create_by(name: "Silver Box", price: "49")
+Plan.find_or_create_by(name: "Gold Box", price: "99")
+
+selected_plan = Plan.first
+
+s = Subscription.find_or_create_by(name: "Nazwa", address: "Sample Address", zip_code: "01001", plan_id: selected_plan.id)
+
+puts "Creating payments"
+Payment.find_or_create_by(token: "890ad4852000d607db3f37f3a62013", success: true, error_code: nil, subscription_id: s.id, amount: selected_plan.price)
+Payment.find_or_create_by(token: nil, success: false, error_code: "1000001", subscription_id: s.id, amount: selected_plan.price)
