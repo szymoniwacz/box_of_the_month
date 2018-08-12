@@ -18,7 +18,7 @@ module ErrorHandler
     elsif error.is_a?(ActiveRecord::RecordNotFound)
       render_error Error::ResourceNotFound.new(error.message)
     else
-      render_error Error::InternalServerError.new(nil, error.message)
+      render_error Error::InternalServerError.new(nil, error)
     end
   end
 

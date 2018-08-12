@@ -1,6 +1,6 @@
 module Payments
   class PaymentSerializer < ActiveModel::Serializer
-    attributes :status, :date, :amount
+    attributes :status, :date, :amount, :error_code
 
     def status
       object.success? ? "success" : "failed"
