@@ -12,6 +12,7 @@ gem 'config', '1.7.0'
 gem 'httparty', '0.16.2'
 gem 'virtus', '1.0.5'
 gem 'active_model_serializers'
+gem 'sidekiq'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

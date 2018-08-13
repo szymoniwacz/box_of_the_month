@@ -1,5 +1,7 @@
 host: localhost:3000
 
+async: true
+
 i18n:
   default_locale: :en
   fallbacks:

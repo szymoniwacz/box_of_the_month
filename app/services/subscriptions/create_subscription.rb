@@ -11,8 +11,7 @@ module Subscriptions
       return build_result(validation_error) if form.invalid?
       subscription.update(status: Subscription::NEW)
       process_payment
-      return build_result(payment_error) unless payment.success?
-      subscription.update(status: Subscription::ACTIVE)
+      subscription.update(status: Subscription::ACTIVE) if payment.success?
       build_result(subscription)
     end
 
@@ -21,8 +20,11 @@ module Subscriptions
     attr_reader :plan, :customer
 
     def process_payment
-      data = Payments::ProcessPayment.call({payment_data: payment_data})
-      @payment = subscription.payments.create(data)
+      if Settings.async
+        Payments::ProcessPaymentJob.perform_later(payment_id: payment.id, payment_data: payment_data)
+      else
+        Payments::ProcessPayment.call(payment: payment, payment_data: payment_data)
+      end
     end
 
     def payment_data
@@ -38,6 +40,10 @@ module Subscriptions
 
     def subscription
       @subscription ||= customer.subscriptions.create(form.to_hash)
+    end
+
+    def payment
+      @payment ||= subscription.payments.create
     end
 
     def plan

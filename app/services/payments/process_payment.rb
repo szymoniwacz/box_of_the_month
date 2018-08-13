@@ -3,6 +3,7 @@ module Payments
     include Service
 
     def initialize(attrs = {})
+      @payment = attrs.fetch(:payment)
       @payment_data = attrs.fetch(:payment_data)
     end
 
@@ -16,7 +17,9 @@ module Payments
 
     def purchase
       @request = HTTParty.post(Settings.payment.url, headers: headers, body: payment_data.to_json)
-      new_payment_data
+      # puts "payment: #{payment.inspect}"
+      payment.update(new_payment_data)
+      # puts "updated payment: #{payment.inspect}"
     end
 
     def headers
