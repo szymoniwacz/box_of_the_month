@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2018_08_12_174349) do
   create_table "subscriptions", force: :cascade do |t|
     t.integer "plan_id"
     t.integer "customer_id"
+    t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

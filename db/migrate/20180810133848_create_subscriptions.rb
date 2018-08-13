@@ -3,6 +3,7 @@ class CreateSubscriptions < ActiveRecord::Migration[5.2]
     create_table :subscriptions do |t|
       t.integer :plan_id
       t.integer :customer_id
+      t.string :status
 
       t.timestamps
     end

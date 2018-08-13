@@ -1,6 +1,6 @@
 module Subscriptions
   class SubscriptionSerializer < BaseSerializer
-    attributes :href, :id, :plan, :payments
+    attributes :href, :id, :plan, :status, :payments
 
     has_many :payments, serializer: Payments::PaymentSerializer
 

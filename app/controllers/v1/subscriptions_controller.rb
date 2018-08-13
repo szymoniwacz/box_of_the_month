@@ -20,6 +20,11 @@ module V1
              serializer: Subscriptions::SubscriptionSerializer
     end
 
+    def cancel
+      result = Subscriptions::CancelSubscription.call(id: params[:subscription_id])
+      head :no_content
+    end
+
     private
 
     def subscription_params

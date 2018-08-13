@@ -10,7 +10,7 @@ puts "Customer's token: #{token.token}"
 
 selected_plan = Plan.first
 
-s = customer.subscriptions.find_or_create_by(plan_id: selected_plan.id)
+s = customer.subscriptions.find_or_create_by(plan_id: selected_plan.id, status: "active")
 
 puts "Creating payments"
 s.payments.find_or_create_by(token: "890ad4852000d607db3f37f3a62013", success: true, error_code: nil, amount: selected_plan.price)

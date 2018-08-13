@@ -9,8 +9,10 @@ module Subscriptions
 
     def call
       return build_result(validation_error) if form.invalid?
+      subscription.update(status: Subscription::NEW)
       process_payment
       return build_result(payment_error) unless payment.success?
+      subscription.update(status: Subscription::ACTIVE)
       build_result(subscription)
     end
 
