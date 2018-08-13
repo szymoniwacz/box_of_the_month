@@ -1,5 +1,8 @@
 module V1
   class CustomersController < ApplicationController
+
+    before_action :authorize_customer!, only: [:show]
+
     def create
       form = Customers::CreateCustomerForm.new(customer_params)
       result = Customers::CreateCustomer.call(form: form)
@@ -10,6 +13,11 @@ module V1
                serializer: Customers::CustomerSerializer,
                status: :created
       end
+    end
+
+    def show
+      render json: customer,
+             serializer: Customers::CustomerSerializer
     end
 
     private

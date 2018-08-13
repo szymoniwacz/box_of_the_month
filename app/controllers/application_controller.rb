@@ -5,6 +5,10 @@ class ApplicationController < ActionController::API
     render json: BoxOfTheMonthAPI.info, status: :ok
   end
 
+  def default_url_options
+    super.merge(host: Settings.host)
+  end
+
   private
 
   def allow_page_caching

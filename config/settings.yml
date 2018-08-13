@@ -1,3 +1,5 @@
+host: localhost:3000
+
 i18n:
   default_locale: :en
   fallbacks:
