@@ -35,8 +35,13 @@ module Payments
         token: request["token"],
         success: request["success"],
         error_code: request["error_code"],
-        amount: payment_data[:amount]
+        amount: payment_data[:amount],
+        status: payment_status
       }
+    end
+
+    def payment_status
+      request["success"] ? Payment::SUCCESS : Payment::FAILED
     end
   end
 end

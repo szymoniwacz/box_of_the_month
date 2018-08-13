@@ -6,7 +6,8 @@ class CreatePayments < ActiveRecord::Migration[5.2]
       t.integer :error_code
       t.integer :subscription_id
       t.float :amount
-      
+      t.string :status
+
       t.timestamps
     end
   end

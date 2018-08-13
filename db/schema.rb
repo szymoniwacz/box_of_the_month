@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2018_08_12_174349) do
     t.integer "error_code"
     t.integer "subscription_id"
     t.float "amount"
+    t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
