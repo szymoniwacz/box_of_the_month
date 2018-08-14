@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 describe Subscriptions::RenewSubscription do
-  let(:subscription) { create(:test_subscription_with_payment) }
+  let(:customer) { create(:customer_with_token) }
+  let(:subscription) { create(:test_subscription_with_payment, customer_id: customer.id) }
   subject { described_class.call(subscription_data) }
 
   context 'when data is valid' do

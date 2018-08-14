@@ -16,7 +16,7 @@ module Subscriptions
     attr_reader :plan, :subscription_id
 
     def renew_payment
-      @payment = subscription.payments.create(Payments::ProcessPayment.call({payment_data: payment_data}))
+      Payments::ProcessPayment.call(payment: payment, payment_data: payment_data)
       return build_result(payment_error) unless @payment.success?
     end
 
@@ -25,6 +25,10 @@ module Subscriptions
         "amount": subscription.plan.price.to_s,
         "token": subscription.payments.last.token
       }
+    end
+
+    def payment
+      @payment ||= subscription.payments.create
     end
 
     def subscription

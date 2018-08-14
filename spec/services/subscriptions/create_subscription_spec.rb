@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 describe Subscriptions::CreateSubscription do
+  let(:customer) { create(:customer_with_token) }
   let(:form) { Subscriptions::CreateSubscriptionForm.new(subscription_data) }
-  subject { described_class.call(form: form) }
+  subject { described_class.call(form: form, customer: customer) }
 
   context 'when form is valid' do
     let(:subscription_data) { attributes_for(:subscription) }

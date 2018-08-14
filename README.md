@@ -87,6 +87,16 @@ Example request:
       "billing_zip_code": 10100
     }
 
+### To cancel the subscription:
+
+    POST http://localhost:3000/v1/subscriptions/1/cancel
+
+### To renew subscriptions run:
+
+    bundle exec rake subscriptions:renew
+
+Canceled subscriptions will not renew.
+
 ### Possible errors in synchronous mode:
 
 If your payment is not successful you will receive message like:
