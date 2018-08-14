@@ -24,6 +24,7 @@ module Subscriptions
         Payments::ProcessPaymentJob.perform_later(payment_id: payment.id, payment_data: payment_data)
       else
         Payments::ProcessPayment.call(payment: payment, payment_data: payment_data)
+        raise payment_error unless payment.success?
       end
     end
 

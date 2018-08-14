@@ -8,5 +8,6 @@ Rails.application.routes.draw do
       post :cancel
     end
     resources :plans, only: [:index]
+    resources :payments, only: [:show]
   end
 end

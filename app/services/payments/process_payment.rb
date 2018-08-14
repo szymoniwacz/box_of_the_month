@@ -17,9 +17,7 @@ module Payments
 
     def purchase
       @request = HTTParty.post(Settings.payment.url, headers: headers, body: payment_data.to_json)
-      # puts "payment: #{payment.inspect}"
       payment.update(new_payment_data)
-      # puts "updated payment: #{payment.inspect}"
     end
 
     def headers
