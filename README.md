@@ -10,7 +10,14 @@ First, install the gems required by the application:
 
     bundle install
 
-Next, execute the database migrations/schema setup:
+Next, provide proper data to 'config/database.yml' file or use environment variables (for postgres database):
+* DATABASE_HOST - Database host
+* DATABASE_NAME - Database name
+* DATABASE_USER - Database username
+* DATABASE_PASS - Database user password
+* DATABASE_PORT - Database port
+
+Than, execute the database migrations/schema setup:
 
     bundle exec rake db:setup
 
@@ -21,6 +28,10 @@ Next, execute the database migrations/schema setup:
 ### Start the app
 
     bundle exec rails server
+
+To start the app in asynchronous mode, don't forget to run sidekiq in parallel with the application.
+
+    bundle exec sidekiq
 
 ## Description
 
@@ -41,12 +52,21 @@ Example request:
 Example response:
 
     {
-      "id": 7,
+      "href": "http://localhost:3000/v1/customers/1",
+      "id": 1,
       "name": "Sample Name",
       "address": "Sample Address",
       "zip_code": "01001",
-      "token": "cbc1c19a-e5fa-4b69-acc0-0b0703187db0"
+      "token": "c7fa17f7-1922-4ad0-8861-ec3acf09ce5f"
     }
+
+#### Showing customer data:
+
+    GET http://localhost:3000/v1/customers/1
+    Content-Type: application/json
+    Authorization: c7fa17f7-1922-4ad0-8861-ec3acf09ce5f
+
+You can only show customer that has provided token.
 
 ### Before subscribing you have to choose which 'Box of the month' plan is most suited for you:
 
@@ -54,9 +74,11 @@ Example response:
 
 ### Than you can subscribe:
 
+Example request:
+
     POST http://localhost:3000/v1/subscriptions
     Content-Type: application/json
-    Authorization: cbc1c19a-e5fa-4b69-acc0-0b0703187db0
+    Authorization: c7fa17f7-1922-4ad0-8861-ec3acf09ce5f
     {
       "plan_id": 1,
       "card_number": 4242424242424242,
@@ -65,7 +87,7 @@ Example response:
       "billing_zip_code": 10100
     }
 
-### Possible errors:
+### Possible errors in synchronous mode:
 
 If your payment is not successful you will receive message like:
 
@@ -89,6 +111,71 @@ Possible error codes:
 * 1000006: Invalid purchase amount
 * 1000007: Invalid token
 * 1000008: Invalid params: cannot specify both token and other credit card params like card_number, cvv, expiration_month, expiration_year or zip .
+
+### In asynchronous mode immediately after request you will receive subscription object with new payment:
+
+    {
+      "href": "http://localhost:3000/v1/subscriptions/1",
+      "id": 1,
+      "plan": {
+        "id": 1,
+        "name": "Bronze Box",
+        "price": 19.99,
+        "currency": "USD"
+      },
+      "status": "new",
+      "payments": [
+        {
+          "id": 1,
+          "status": "new",
+          "date": "2018-08-12 06:46:49"
+        }
+      ]
+    }
+
+Payment will proces asynchronously so to check it's status. You can do it using valid token:
+
+Example request:
+
+    GET http://localhost:3000/v1/payments/1
+    Content-Type: application/json
+    Authorization: c7fa17f7-1922-4ad0-8861-ec3acf09ce5f
+
+Example response:
+
+    {
+      "href": "http://localhost:3000/v1/payments/28",
+      "id": 28,
+      "status": "failed",
+      "date": "2018-08-14 07:27:11",
+      "amount": 19.99,
+      "error_code": 1000001,
+      "error": "Invalid credit card number"
+    }
+
+### Settings
+    host: localhost:3000
+
+    async: true
+
+    i18n:
+      default_locale: :en
+      fallbacks:
+        - :en
+
+    payment:
+      token: "64146941c4fe1666945e648cf429c0"
+      url: "https://www.fakepay.io/purchase"
+
+    cache:
+      static_page:
+        expires_in: 10.minutes
+
+* host - Host address of your application
+* async - Choose if you want to process payments asynchronously
+* i18n - Settings of application language
+* payment - Settings of payment gateway url and access token.
+* cache - Cache settings
 
 ## Task description
 
