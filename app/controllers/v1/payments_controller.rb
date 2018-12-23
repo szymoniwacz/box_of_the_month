@@ -1,6 +1,5 @@
 module V1
   class PaymentsController < ApplicationController
-
     before_action :authorize_customer!
 
     def show

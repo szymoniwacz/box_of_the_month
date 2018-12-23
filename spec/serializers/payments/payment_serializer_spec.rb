@@ -3,8 +3,7 @@ require 'rails_helper'
 describe Payments::PaymentSerializer, type: :serializer do
   let(:customer) { create(:customer_with_token) }
   let(:subscription) { create(:test_subscription, customer_id: customer.id) }
-  let(:resource) { create(:payment, subscription_id: subscription.id,
-                                    amount: subscription.plan.price) }
+  let(:resource) { create(:payment, subscription_id: subscription.id, amount: subscription.plan.price) }
   let(:serializer) { described_class.new(resource) }
 
   subject { JSON.parse(serializer.to_json) }

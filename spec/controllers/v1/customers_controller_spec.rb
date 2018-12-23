@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 describe V1::CustomersController, type: :controller do
-  describe "POST #create" do
-    context "when customer attributes valid" do
+  describe 'POST #create' do
+    context 'when customer attributes valid' do
       let(:valid_customer_data) { attributes_for(:customer) }
 
       it {

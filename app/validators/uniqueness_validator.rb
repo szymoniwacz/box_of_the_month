@@ -13,8 +13,6 @@ class UniquenessValidator < ActiveRecord::Validations::UniquenessValidator
 
     super
 
-    if record.errors.any?
-      record_org.errors.add(attribute_org, :not_unique)
-    end
+    record_org.errors.add(attribute_org, :not_unique) if record.errors.any?
   end
 end

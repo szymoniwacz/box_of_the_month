@@ -1,7 +1,7 @@
 class Error
   class ResourceNotFound < Error
-    def initialize(key = nil, value = {})
-      message = I18n.t(:resource_not_found, scope: 'errors.messages', id: value.fetch(:id, nil))
+    def initialize(message = nil)
+      message ||= I18n.t(:resource_not_found, scope: 'errors.messages')
       super(message, :resource_not_found, {}, 404)
     end
   end

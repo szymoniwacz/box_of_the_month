@@ -1,6 +1,5 @@
 module V1
   class SubscriptionsController < ApplicationController
-
     before_action :authorize_customer!
 
     def create
@@ -21,7 +20,7 @@ module V1
     end
 
     def cancel
-      result = Subscriptions::CancelSubscription.call(id: params[:subscription_id])
+      Subscriptions::CancelSubscription.call(id: params[:subscription_id])
       head :no_content
     end
 

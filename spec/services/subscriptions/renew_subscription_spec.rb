@@ -6,7 +6,7 @@ describe Subscriptions::RenewSubscription do
   subject { described_class.call(subscription_data) }
 
   context 'when data is valid' do
-    let(:subscription_data) { {subscription_id: subscription.id} }
+    let(:subscription_data) { { subscription_id: subscription.id } }
     it do
       VCR.use_cassette('services/subscriptions/valid_renew') do
         expect(subject.success?).to be_truthy
@@ -15,7 +15,7 @@ describe Subscriptions::RenewSubscription do
   end
 
   context 'when data is invalid' do
-    let(:subscription_data) { {subscription_id: "dummy_id"} }
+    let(:subscription_data) { { subscription_id: 'dummy_id' } }
     it do
       VCR.use_cassette('services/subscriptions/invalid_renew') do
         expect { subject }.to raise_error(ActiveRecord::RecordNotFound)

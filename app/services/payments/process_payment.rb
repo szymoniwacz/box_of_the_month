@@ -30,16 +30,16 @@ module Payments
 
     def new_payment_data
       {
-        token: request["token"],
-        success: request["success"],
-        error_code: request["error_code"],
+        token: request['token'],
+        success: request['success'],
+        error_code: request['error_code'],
         amount: payment_data[:amount],
         status: payment_status
       }
     end
 
     def payment_status
-      request["success"] ? Payment::SUCCESS : Payment::FAILED
+      request['success'] ? Payment::SUCCESS : Payment::FAILED
     end
   end
 end

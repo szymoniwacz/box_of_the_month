@@ -1,13 +1,15 @@
-class Customer::Token < ApplicationRecord
-  belongs_to :customer
+class Customer
+  class Token < ApplicationRecord
+    belongs_to :customer
 
-  before_create :generate_token
+    before_create :generate_token
 
-  private
+    private
 
-  def generate_token
-    token = SecureRandom.uuid
-    token = SecureRandom.uuid until Customer::Token.find_by_token(token).nil?
-    self.token = token
+    def generate_token
+      token = SecureRandom.uuid
+      token = SecureRandom.uuid until Customer::Token.find_by_token(token).nil?
+      self.token = token
+    end
   end
 end

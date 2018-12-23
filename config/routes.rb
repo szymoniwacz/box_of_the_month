@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   # match '/', to: 'application#routing_not_found', via: [:post, :put]
 
   namespace :v1 do
-    resources :customers, only: [:show, :create]
-    resources :subscriptions, only: [:show, :create] do
+    resources :customers, only: %i[show create]
+    resources :subscriptions, only: %i[show create] do
       post :cancel
     end
     resources :plans, only: [:index]

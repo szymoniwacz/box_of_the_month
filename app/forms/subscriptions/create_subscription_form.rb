@@ -1,6 +1,5 @@
 module Subscriptions
   class CreateSubscriptionForm < Form
-
     attribute :plan_id, Integer
     attribute :card_number, Integer
     attribute :expiration_date, String

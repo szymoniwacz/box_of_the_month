@@ -1,6 +1,5 @@
 module V1
   class CustomersController < ApplicationController
-
     before_action :authorize_customer!, only: [:show]
 
     def create

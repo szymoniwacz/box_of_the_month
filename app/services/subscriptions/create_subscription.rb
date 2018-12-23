@@ -17,7 +17,7 @@ module Subscriptions
 
     private
 
-    attr_reader :plan, :customer
+    attr_reader :customer
 
     def process_payment
       if Settings.async
@@ -33,8 +33,8 @@ module Subscriptions
         "amount": plan.price.to_s,
         "card_number": form[:card_number],
         "cvv": form[:cvv],
-        "expiration_month": Date.parse(form[:expiration_date]).strftime("%m"),
-        "expiration_year": Date.parse(form[:expiration_date]).strftime("%Y"),
+        "expiration_month": Date.parse(form[:expiration_date]).strftime('%m'),
+        "expiration_year": Date.parse(form[:expiration_date]).strftime('%Y'),
         "zip_code": form[:billing_zip_code]
       }
     end

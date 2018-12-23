@@ -1,6 +1,5 @@
 module Customers
   class CreateCustomerForm < Form
-
     attribute :name, String
     attribute :address, String
     attribute :zip_code, String
