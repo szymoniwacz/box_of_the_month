@@ -17,6 +17,8 @@ group :development, :test do
   gem 'factory_bot_rails', '4.11.1'
   gem 'faker', '1.9.1'
   gem 'rubocop-rspec', '1.30.1'
+  gem 'webmock', '3.4.2'
+  gem 'vcr', '4.0.0'
 end
 
 group :development do

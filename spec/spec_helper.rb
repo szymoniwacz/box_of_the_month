@@ -13,6 +13,11 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+
+# Require every ruby file inside the spec/support directory, and subdirectories,
+# so that it can be used directly in your tests.
+Dir["./spec/support/**/*.rb"].each { |f| require f }
+
 RSpec.configure do |config|
   config.before(:suite) do
     Plan.find_or_create_by(name: "Bronze Box", price: "19.99")

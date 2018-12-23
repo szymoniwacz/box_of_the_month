@@ -7,11 +7,19 @@ describe Subscriptions::RenewSubscription do
 
   context 'when data is valid' do
     let(:subscription_data) { {subscription_id: subscription.id} }
-    it { expect(subject.success?).to be_truthy }
+    it do
+      VCR.use_cassette('services/subscriptions/valid_renew') do
+        expect(subject.success?).to be_truthy
+      end
+    end
   end
 
   context 'when data is invalid' do
     let(:subscription_data) { {subscription_id: "dummy_id"} }
-    it { expect { subject }.to raise_error(ActiveRecord::RecordNotFound) }
+    it do
+      VCR.use_cassette('services/subscriptions/invalid_renew') do
+        expect { subject }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
   end
 end

@@ -1,0 +1,58 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://www.fakepay.io/purchase
+    body:
+      encoding: UTF-8
+      string: '{"amount":"19.99","card_number":4242424242424242,"cvv":123,"expiration_month":"01","expiration_year":"2024","zip_code":"10100"}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Authorization:
+      - Token token=64146941c4fe1666945e648cf429c0
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Cowboy
+      Date:
+      - Sun, 23 Dec 2018 16:55:20 GMT
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"27245f4478420994c3671c15d2505b78"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 627db720-cc2e-40a1-841a-d36bef56a602
+      X-Runtime:
+      - '0.017441'
+      Transfer-Encoding:
+      - chunked
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: '{"token":"0ac1415216f3ab6e95dbc9ef155380","success":true,"error_code":null}'
+    http_version: 
+  recorded_at: Sun, 23 Dec 2018 16:55:21 GMT
+recorded_with: VCR 4.0.0

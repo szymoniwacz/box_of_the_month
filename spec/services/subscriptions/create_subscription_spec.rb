@@ -7,11 +7,19 @@ describe Subscriptions::CreateSubscription do
 
   context 'when form is valid' do
     let(:subscription_data) { attributes_for(:subscription) }
-    it { expect(subject.success?).to be_truthy }
+    it do
+      VCR.use_cassette('services/subscriptions/valid_create') do
+        expect(subject.success?).to be_truthy
+      end
+    end
   end
 
   context 'when form is invalid' do
     let(:subscription_data) { attributes_for(:invalid_subscription) }
-    it { expect(subject.error?).to be_truthy }
+    it do
+      VCR.use_cassette('services/subscriptions/invalid_create') do
+        expect(subject.error?).to be_truthy
+      end
+    end
   end
 end

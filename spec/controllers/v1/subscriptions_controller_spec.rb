@@ -9,9 +9,11 @@ describe V1::SubscriptionsController, type: :controller do
       let(:valid_subscription_data) { attributes_for(:subscription) }
 
       it {
-        post :create, params: valid_subscription_data
-        expect(response).to be_successful
-        expect(response).to have_http_status(201)
+        VCR.use_cassette('controllers/subscriptions/create') do
+          post :create, params: valid_subscription_data
+          expect(response).to be_successful
+          expect(response).to have_http_status(201)
+        end
       }
     end
   end
