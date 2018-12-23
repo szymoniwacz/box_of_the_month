@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :customer do
-    name "MyString"
-    address "MyString"
-    zip_code "MyString"
+    name { "MyString" }
+    address { "MyString" }
+    zip_code { "MyString" }
 
     factory :customer_with_token do
       after(:create) do |customer|
