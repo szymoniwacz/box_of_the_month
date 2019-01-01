@@ -23,7 +23,6 @@ module ErrorHandler
   end
 
   def render_error(object)
-    # render json: object, serializer: ErrorSerializer, status: object.status
     render json: object.as_json, status: object.as_json[:status]
   end
 end

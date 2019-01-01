@@ -6,7 +6,7 @@ class Form
 
   define_model_callbacks :initialize, only: :after
 
-  attr_reader :keys, :objects
+  attr_reader :keys, :objects, :settings
 
   class << self
     def inherited(base)
@@ -25,10 +25,6 @@ class Form
 
     def config(object)
       @settings = object
-    end
-
-    def settings
-      @settings
     end
   end
 
